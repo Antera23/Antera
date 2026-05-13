@@ -157,7 +157,7 @@ function checkoutWhatsApp() {
 // =========================
 async function checkoutMercadoPago() {
   try {
-    const res = await fetch("http://127.0.0.1:3000/create-payment", {
+    const res = await fetch("https://antera-backend.onrender.com/create-payment", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
