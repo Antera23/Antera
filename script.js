@@ -9,7 +9,7 @@ function saveCart() {
 }
 
 // =========================
-// ABRIR / CERRAR CARRITO
+// TOGGLE CARRITO
 // =========================
 function toggleCart() {
   document.getElementById("cart-sidebar").classList.toggle("active");
@@ -93,10 +93,13 @@ function renderCart() {
 
         <div class="qty-controls">
 
-          <button class="qty-btn" onclick="decreaseQty(${index})">−</button>
-          <span class="qty-number">${item.qty}</span>
-          <button class="qty-btn" onclick="increaseQty(${index})">+</button>
-          <button class="remove-btn" onclick="removeItem(${index})">✕</button>
+          <button onclick="decreaseQty(${index})">−</button>
+
+          <span>${item.qty}</span>
+
+          <button onclick="increaseQty(${index})">+</button>
+
+          <button onclick="removeItem(${index})">✕</button>
 
         </div>
 
@@ -110,7 +113,7 @@ function renderCart() {
 }
 
 // =========================
-// CANTIDADES
+// SUMAR / RESTAR
 // =========================
 function increaseQty(index) {
   cart[index].qty++;
@@ -136,9 +139,44 @@ function removeItem(index) {
 }
 
 // =========================
+// 🔥 MERCADO PAGO CHECKOUT (RENDER)
+// =========================
+async function checkoutMercadoPago() {
+
+  if (cart.length === 0) {
+    alert("El carrito está vacío");
+    return;
+  }
+
+  try {
+    const res = await fetch("https://antera.onrender.com/create-payment", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ items: cart })
+    });
+
+    const data = await res.json();
+
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      alert("Error al generar el pago");
+      console.log(data);
+    }
+
+  } catch (error) {
+    console.log("Error:", error);
+    alert("Error conectando con el servidor");
+  }
+}
+
+// =========================
 // WHATSAPP (OPCIONAL)
 // =========================
 function checkoutWhatsApp() {
+
   let message = "Hola! quiero comprar:%0A%0A";
   let total = 0;
 
@@ -149,32 +187,8 @@ function checkoutWhatsApp() {
 
   message += `%0ATotal: $${total}`;
 
-  window.open(`https://wa.me/59897458846?text=${message}`, "_blank");
-}
-
-// =========================
-// 💳 MERCADO PAGO (ARREGLADO)
-// =========================
-async function checkoutMercadoPago() {
-  try {
-    const res = await fetch("https://antera-backend.onrender.com/create-payment", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ items: cart }),
-    });
-
-    const data = await res.json();
-
-    if (data.url) {
-      window.location.href = data.url;
-    } else {
-      alert("Error al generar pago");
-    }
-
-  } catch (error) {
-    console.log(error);
-    alert("Error conectando con el servidor");
-  }
+  window.open(
+    `https://wa.me/59897458846?text=${message}`,
+    "_blank"
+  );
 }
