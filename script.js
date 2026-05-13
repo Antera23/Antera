@@ -139,53 +139,24 @@ function removeItem(index) {
 }
 
 // =========================
-// 🔥 MERCADO PAGO CHECKOUT (RENDER)
+// 💬 WHATSAPP CHECKOUT (FINAL)
 // =========================
-async function checkoutMercadoPago() {
+function checkoutWhatsApp() {
 
   if (cart.length === 0) {
     alert("El carrito está vacío");
     return;
   }
 
-  try {
-    const res = await fetch("https://antera.onrender.com/create-payment", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ items: cart })
-    });
-
-    const data = await res.json();
-
-    if (data.url) {
-      window.location.href = data.url;
-    } else {
-      alert("Error al generar el pago");
-      console.log(data);
-    }
-
-  } catch (error) {
-    console.log("Error:", error);
-    alert("Error conectando con el servidor");
-  }
-}
-
-// =========================
-// WHATSAPP (OPCIONAL)
-// =========================
-function checkoutWhatsApp() {
-
   let message = "Hola! quiero comprar:%0A%0A";
   let total = 0;
 
   cart.forEach(item => {
-    message += `- ${item.name} x${item.qty} ($${item.price})%0A`;
+    message += `• ${item.name} x${item.qty} - $${item.price}%0A`;
     total += item.price * item.qty;
   });
 
-  message += `%0ATotal: $${total}`;
+  message += `%0A💰 Total: $${total}`;
 
   window.open(
     `https://wa.me/59897458846?text=${message}`,
