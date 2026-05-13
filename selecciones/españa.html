@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>España 2026 - ANTERA</title>
+
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav>
+
+    <div class="logo">
+      <h1>ANTERA</h1>
+      <p>CULTURA DEL FÚTBOL</p>
+    </div>
+
+    <div class="nav-links">
+      <a href="../index.html">INICIO</a>
+      <a href="../clubes.html">CLUBES</a>
+      <a href="../selecciones.html">SELECCIONES</a>
+      <a href="../contacto.html">CONTACTO</a>
+    </div>
+
+    <div class="menu-toggle">☰</div>
+
+    <div class="icons">
+      <div onclick="toggleCart()" style="cursor:pointer;">🛒</div>
+    </div>
+
+  </nav>
+
+  <!-- PRODUCT PAGE -->
+  <section class="product-page">
+
+    <div class="product-image">
+      <img src="../images/espana1.jpg" alt="España 2026">
+    </div>
+
+    <div class="product-info">
+
+      <!-- 🔥 DATA PRODUCTO (CLAVE PARA QUE NO SE MEZCLE) -->
+      <div id="product-data"
+           data-name="España 2026"
+           data-price="1690"
+           data-id="espana2026">
+      </div>
+
+      <h1>España 2026</h1>
+
+      <div class="product-price">$1690</div>
+
+      <p class="product-description">
+        Camiseta versión jugador Thai Premium 1:1.
+        Diseño oficial de la selección española con materiales premium.
+      </p>
+
+      <!-- TALLAS -->
+      <div class="size-title">Seleccioná talle:</div>
+
+      <div class="size-options">
+        <button onclick="selectSize(this)">S</button>
+        <button onclick="selectSize(this)">M</button>
+        <button onclick="selectSize(this)">L</button>
+        <button onclick="selectSize(this)">XL</button>
+      </div>
+
+      <!-- BOTÓN -->
+      <button class="whatsapp-btn" onclick="addToCart()">
+        AGREGAR AL CARRITO
+      </button>
+
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2026 ANTERA — CULTURA DEL FÚTBOL
+  </footer>
+
+  <!-- CART -->
+  <div class="cart-sidebar" id="cart-sidebar">
+
+    <div class="cart-header">
+      <h2>Carrito</h2>
+      <span onclick="toggleCart()">✕</span>
+    </div>
+
+    <div id="cart-items"></div>
+
+ <div class="cart-footer">
+
+  <h3>Total: $<span id="cart-total">0</span></h3>
+
+  <button class="mp-btn" onclick="checkoutMercadoPago()">
+    💳 PAGAR CON MERCADO PAGO
+  </button>
+
+  <button class="transfer-btn" onclick="showTransfer()">
+    🏦 TRANSFERENCIA
+  </button>
+
+</div>
+
+  <script src="../script.js"></script>
+
+</body>
+</html>
